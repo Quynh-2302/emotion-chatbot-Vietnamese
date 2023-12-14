@@ -1,0 +1,15 @@
+<!--
+{% block title %}辨識結果{% endblock title %}
+-->
+
+{% block content %}
+<h1>&nbsp;&nbsp;Emotion Result (Happy、Sad、Calm、Fearful、Angry)</h1>
+<p><b>&emsp;&emsp;{{ Happy }} %</b></p>
+<p><b>&emsp;&emsp;{{ Sad }} %</b></p>
+<p><b>&emsp;&emsp;{{ Calm }} %</b></p>
+<p><b>&emsp;&emsp;{{ Fearful }} %</b></p>
+<p><b>&emsp;&emsp;{{ Angry }} %</b></p>
+<h1>&nbsp;&nbsp;Chatbot Result</h1>
+<p><b>&emsp;&emsp;ask&nbsp;=&nbsp;{{ ask }}</b></p>
+<p><b>&emsp;&emsp;response&nbsp;=&nbsp;{{ res }}</b></p>
+{% endblock content %}

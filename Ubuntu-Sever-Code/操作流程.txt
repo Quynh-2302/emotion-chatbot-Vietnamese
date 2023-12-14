@@ -1,0 +1,91 @@
+﻿	!!!以android-server為範例!!!
+
+
+	使用Ubuntu 16.04 版本
+
+	先建立好NVIDIA DIGITS 深度學習平台
+
+	安裝DeepQA 需要的套件
+　 
+	上述流程流程不明白，請見邱盛宇學長論文中的附錄有清楚說明！！！
+
+
+
+
+
+	執行server流程，執行請用python3(請下載python3的版本，執行流程都是在終端機執行)
+	1. 切換目錄到 Ubuntu-Sever-Code/android-server/android
+ 
+	2. 執行Restart.py檔案 (python3 Restart.py)
+
+	3. 檢查server有沒有打開 (終端機確認 或 再網頁打上你的IP加上Port 5050 Ex:120.125.85.10:5050)
+  
+	4. 測試聲音檔案只能為　單聲道　16Bit 的格式　不然會出錯！！！！
+ 
+	備註：再執行過程中有可能會有很多錯誤，大部分的原因是因為python的套件沒有安裝完整 或 DIGITS&DeepQA沒有完整安裝完成，
+
+	因此請自行google(大部份google完都叫你用pip 請改成 pip3 下載)，檢查套件是否有安裝成功使用 pip3 list 指令。
+
+
+
+
+
+	修改程式碼(主程式為AWWW_web.py)
+	1.　AWWW_pic_pred.py 檔案要修改job_id （DIGITS model key 使用DIGITS訓練好的模型都會有一個網址　Ex:http://localhost/models/20171127-172438-efbe ，
+
+	job_id=20171127-172438-efbe） 跟 image_file的路徑　( Ex:@/home/使用者名稱/Ubuntu-Sever-Code/android-server/android/test.png)
+
+	2.　file_del.py　檔案要修改path的路徑 (Ex: "/home/使用者名稱/Ubuntu-Sever-Code/android-server/android/uploads/")
+
+	3.　AWWW_web.py　中檔案要修改73行~86行你的情緒類別，96行AkishinoProjectBot.main(['--modelTag', 'positive_negative_correct', '--test', 'daemon'])
+
+	'positive_negative_correct'　修改你自己訓練的RNN對話模型名稱
+
+
+
+
+
+	訓練RNN　model 指令
+	1. 要先確認/data/embeddings底下是否有vec2bin.py與wiki.zh.vec檔案，再把你的文本放到/data/lightweight　底下
+
+	訓練好的model 會存放再save資料夾底下，如果要再訓練時有發生錯誤有可能是你文本中的單詞量沒有超過300的單詞！！！
+ 
+
+	2. 訓練 python3 main.py --corpus lightweight --datasetTag <name> --initEmbeddings --embeddingSource=wiki.zh.vec --modelTag <model name> --numEpochs  10000
+
+
+	3. 測試 python3 main.py --test interactive --modelTag <model name>
+
+
+	4. 伺服器 AWWW_web.py 裡改 "AkishinoProjectBot.main(['--modelTag', 'positive_negative_correct', '--test', 'daemon'])"(96行) 的'positive_negative_correct' 改成妳的 <model name>
+
+
+
+
+
+	將文件使用jieba斷詞
+
+	1. 在jieba-segmentation資料夾底下放入你的文本，Ex:taiwa20170709.txt
+
+	2. 修改AWWW_jiebaCut.py 檔案第10行，將你的文本名稱改成你的名稱
+
+	3. 使用終端機切換目錄到jieba-segmentation資料夾底下，使用python3 執行 AWWW_jiebaCut.py (python3 AWWW_jiebaCut.py)
+
+	4. 斷詞結果會顯示再終端機上，複製到新的txt檔即可
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
